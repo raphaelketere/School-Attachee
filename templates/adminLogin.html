@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #F7F9FB;
+        }
+
+        h2 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        h1 {
+        text-align: center;
+        color: #008080;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: #ffffff;
+        padding: 10px;
+        margin: 0;
+         }
+
+        form {
+            width: 300px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px #ccc;
+        }
+
+        label {
+            display: flex;
+            align-items: center;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 20px; /* Add rounded corners */
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .fa-user,
+        .fa-lock {
+            margin-right: 10px;
+            color: #ccc;
+        }
+
+        .fa-user {
+            font-size: 18px;
+        }
+
+        .fa-lock {
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1><i class="fas fa-graduation-cap"></i> Maasai Mara University Attacheés Management Website</h1>
+    <form action="/admin_login" method="POST">
+        <h2 class="fas fa-user-cog">Admin Login</h2>
+        <div>
+            <label>
+                <i class="fas fa-user"></i>
+                <input type="text" name="username" placeholder="Username" required>
+            </label>
+        </div>
+        <div>
+            <label>
+                <i class="fas fa-lock"></i>
+                <input type="password" name="password" placeholder="Password" required>
+            </label>
+        </div>
+        <input type="submit" value="Login">
+    </form>
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Attachee Registration</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #F7F9FB;
+        }
+
+        h2 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            width: 400px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px #ccc;
+        }
+
+        label {
+            display: flex;
+            align-items: center;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="password"],
+        select,
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .fa-user,
+        .fa-university,
+        .fa-envelope,
+        .fa-phone,
+        .fa-list,
+        .fa-calendar-alt,
+        .fa-lock {
+            margin-right: 10px;
+            color: #ccc;
+        }
+        h1 {
+        text-align: center;
+        color: #008080;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: #ffffff;
+        padding: 10px;
+        margin: 0;
+         }
+
+        .fa-user,
+        .fa-university,
+        .fa-envelope,
+        .fa-phone,
+        .fa-calendar-alt,
+        .fa-list {
+            font-size: 16px;
+        }
+
+        .fa-lock {
+            font-size: 14px;
+        }
+
+        .field-of-interest {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .field-of-interest label {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1><i class="fas fa-graduation-cap"></i> Maasai Mara University Attacheés Management Website</h1>
+
+    <form action="/attachees_registration" method="POST">
+        <h2><i class="fas fa-graduation-cap"></i> Attachee Registration</h2>
+        <div>
+            <label>
+                <i class="fas fa-user"></i>
+                <input type="text" name="name" placeholder="Name" required>
+            </label>
+        </div>
+        <div>
+            <label>
+                <i class="fas fa-university"></i>
+                <input type="text" name="university" placeholder="College/University" required>
+            </label>
+        </div>
+        <div>
+            <label>
+                <i class="fas fa-list"></i>
+                <select name="course" required>
+                    <option value="" selected disabled>Select Course</option>
+                    <option value="BACHELOR IN INFORMATION TECHNOLOGY">BACHELOR IN INFORMATION TECHNOLOGY</option>
+                    <option value="APPLIED COMPUTER SCIENCE">APPLIED COMPUTER SCIENCE</option>
+                    <option value="COMPUTER SCIENCE"> COMPUTER SCIENCE</option>
+                    <option value="SOFTWARE ENGINEERING"> SOFTWARE ENGINEERING</option>
+                </select>
+            </label>
+        </div>
+        <div>
+            <label>
+                <i class="fas fa-envelope"></i>
+                <input type="email" name="email" placeholder="Email" required>
+            </label>
+        </div>
+        <div>
+            <label>
+                <i class="fas fa-phone"></i>
+                <input type="tel" name="contact" placeholder="Contact" required>
+            </label>
+        </div>
+        <div>
+            <label>
+                <i class="fas fa-list"></i>
+                <span>Field of Interest (Choose up to 3)</span>
+            </label>
+            <div class="field-of-interest">
+                <label>
+                    <input type="checkbox" name="interests[]" value="Networking"> Networking and Communication
+                </label>
+                <label>
+                    <input type="checkbox" name="interests[]" value="Software and Web Development"> Software and Web Development
+                </label>
+                <label>
+                    <input type="checkbox" name="interests[]" value="Programming"> Programming
+                </label>
+                <label>
+                    <input type="checkbox" name="interests[]" value="Mobile Application"> Mobile Application
+                </label>
+                <label>
+                    <input type="checkbox" name="interests[]" value="Game Development"> Game Development
+                </label>
+            </div>
+        </div>
+        
+        <script>
+            const checkboxes = document.querySelectorAll('input[name="interests[]"]');
+            const maxSelection = 3;
+        
+            checkboxes.forEach(function (checkbox) {
+                checkbox.addEventListener('change', function () {
+                    const selectedCount = document.querySelectorAll('input[name="interests[]"]:checked').length;
+                    if (selectedCount > maxSelection) {
+                        this.checked = false;
+                    }
+                });
+            });
+        </script>
+        
+        
+        
+        <div>
+            <label>
+                <i class="fas fa-calendar-alt"></i>
+                <span>Start Date</span>
+                <input type="date" id="start_date" name="start_date" placeholder="Start Date" required>
+            </label>
+        </div>
+        <div>
+            <label>
+                <i class="fas fa-calendar-alt"></i>
+                <span>End Date</span>
+                <input type="date" id="end_date" name="end_date" placeholder="End Date" required>
+            </label>
+        </div>
+        
+        <script>
+            const startDateInput = document.getElementById('start_date');
+            const endDateInput = document.getElementById('end_date');
+        
+            startDateInput.addEventListener('input', function () {
+                const startDate = new Date(startDateInput.value);
+                const endDate = new Date(startDate.getFullYear(), startDate.getMonth() + 2, startDate.getDate());
+                endDateInput.value = endDate.toISOString().split('T')[0];
+            });
+        </script>
+        <input type="submit" value="Register">
+    </form>
+</body>
+</html>

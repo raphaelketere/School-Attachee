@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Assign Supervisors to Attachés</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 0;
+		}
+
+		h1 {
+			text-align: center;
+			color: #008080;
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			background-color: #ffffff;
+			padding: 10px;
+			margin: 0;
+		}
+
+		header {
+			color: black;
+			padding: 10px;
+			text-align: center;
+			font-size: 20px;
+			font-weight: bold;
+			margin-top: 50px; /* Added margin to the top */
+		}
+
+		.container {
+			margin: auto;
+			padding: 10px;
+			max-width: 600px;
+		}
+
+		label {
+			display: block;
+			margin-bottom: 10px;
+			font-weight: bold;
+		}
+
+		select {
+			display: block;
+			width: 100%;
+			padding: 10px;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			box-sizing: border-box;
+			margin-bottom: 20px;
+		}
+
+		button {
+			background-color: #4CAF50;
+			color: white;
+			padding: 10px;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+			font-size: 16px;
+			margin-top: 10px;
+		}
+
+		button:hover {
+			background-color: #3e8e41;
+		}
+
+		.student-list {
+			margin-top: 20px;
+		}
+
+		.student-list label {
+			display: block;
+			margin-bottom: 5px;
+		}
+
+		.student-list input[type="checkbox"] {
+			margin-right: 5px;
+		}
+		.supervisor-link {
+		display: inline-block;
+		padding: 10px 20px;
+		border-radius: 10px;
+		background-color: #4CAF50;
+		color: white;
+		text-decoration: none;
+		font-weight: bold;
+		transition: background-color 0.3s ease;
+		}
+
+		.supervisor-link:hover {
+		background-color: #45a049;
+		}
+
+	</style>
+</head>
+<body>
+	<h1><i class="fas fa-graduation-cap"></i> Maasai Mara University Attacheés Management Website</h1>
+	<header>Assign Supervisors to Attachés</header>
+	<div class="container">
+		<form>
+			<label for="field_of_interest">Select Field of Interest:</label>
+			<select name="field_of_interest" id="field_of_interest">
+				<option value="">--Select Field--</option>
+				<option value="Networking">Networking</option>
+				<option value="Software Development">Software Development</option>
+				<option value="Programming">Programming</option>
+				<option value="Android Development">Android Development</option>
+				<option value="Website Development">Website Development</option>
+			</select>
+			<button type="button" id="get_students">Get Attacheés</button>
+
+			<div class="student-list">
+				<label>Attacheés:</label>
+				<div id="student_container"></div>
+			</div>
+
+			<a href="supervisor.html" class="supervisor-link">Assign Supervisor</a>
+
+		</form>
+	</div>
+
+	<script>
+		const getStudentsBtn = document.getElementById('get_students');
+		const assignBtn = document.getElementById('assign_supervisor');
+		const studentContainer = document.getElementById('student_container');
+
+		getStudentsBtn.addEventListener('click', function() {
+			const selectedField = document.getElementById('field_of_interest').value;
+			if (selectedField) {
+				// Simulate fetching students from a backend server
+				const students = fetchStudents(selectedField);
+
+				// Display the list of students
+				displayStudents(students);
+				studentContainer.style.display = 'block';
+			} else {
+				alert('Please select a field of interest to get the list of students.');
+				studentContainer.style.display = 'none';
+			}
+		});
+
+		assignBtn.addEventListener('click', function() {
+			const selectedStudents = getSelectedStudents();
+			if (selectedStudents.length > 0) {
+				const supervisor = prompt('Enter the name of the supervisor:');
+				if (supervisor) {
+					assignSupervisor(selectedStudents, supervisor);
+				} else {
+					alert('Please enter the name of the supervisor.');
+				}
+			} else {
+				alert('Please select at least one student to assign a supervisor.');
+			}
+		});
+
+		function fetchStudents(field) {
+			// Simulated data for demonstration purposes
+			const students = [
+				{ name: 'Student 1', field: 'Networking' },
+				{ name: 'Student 2', field: 'Networking' },
+				{ name: 'Student 3', field: 'Software Development' },
+				{ name: 'Student 4', field: 'Programming' },
+				{ name: 'Student 5', field: 'Networking' },
+			];
+
+			// Filter students based on the selected field
+			return students.filter(student => student.field === field);
+		}
+
+		function displayStudents(students) {
+			studentContainer.innerHTML = '';
+
+			students.forEach(student => {
+				const label = document.createElement('label');
+				const checkbox = document.createElement('input');
+				checkbox.type = 'checkbox';
+				checkbox.name = 'students';
+				checkbox.value = student.name;
+
+				label.appendChild(checkbox);
+				label.appendChild(document.createTextNode(student.name));
+
+				studentContainer.appendChild(label);
+			});
+		}
+
+		function getSelectedStudents() {
+			const checkboxes = document.querySelectorAll('input[name="students"]:checked');
+			return Array.from(checkboxes).map(checkbox => checkbox.value);
+		}
+
+		function assignSupervisor(students, supervisor) {
+			// Simulated functionality to assign supervisor
+			alert(`Assigned supervisor "${supervisor}" to students: ${students.join(', ')}`);
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attachee Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <style>
+        /* Add your custom CSS styles here */
+        body {
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #070be9;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #ffffff;
+            padding: 10px;
+            margin: 0;
+        }
+        
+        .welcome-screen {
+            background-color: #cccccc;
+            padding: 30px;
+            text-align: center;
+            margin-top: 100px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .welcome-screen h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        
+        .welcome-screen p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .button-wrapper {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .signin-btn {
+            background-color: #07ad1d;
+            color: #fff;
+            border: none;
+            border-radius: 20px; /* Rounded corners */
+            padding: 10px 20px;
+            margin-right: 10px;
+            font-size: 20px; /* Increased font size */
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease; /* Transition effect for hover */
+        }
+        
+        .form-block {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+        }
+
+        .form-block label {
+            margin-bottom: 20px;
+        }
+
+        .form-inline {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .form-inline .form-field {
+            width: calc(25% - 10px);
+        }
+
+        .form-inline label {
+            width: 10%;
+        }
+    </style>
+</head>
+<body>
+    <h1><i class="fas fa-graduation-cap"></i> Maasai Mara University Attacheés Management System</h1>
+    <div class="welcome-screen">
+        <h2>Welcome, {{ attachee_name }}</h2>
+        
+        <form action="/attachee_login" method="POST">
+
+            <div class="form-inline">
+                <div class="form-field">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" value="{{ attachee_name }}" readonly>
+                </div>
+    
+                <div class="form-field">
+                    <label for="university">University:</label>
+                    <input type="text" id="university" name="university" value="{{ attachee_university }}" readonly>
+                </div>
+    
+                <div class="form-field">
+                    <label for="course">Course:</label>
+                    <input type="text" id="course" name="course" value="{{ attachee_course }}" readonly>
+                </div>
+            
+                <div class="form-field">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" value="{{ attachee_email }}" readonly>
+                </div>
+
+                <div class="form-field">
+                    <label for="contact">Contact:</label>
+                    <input type="tel" id="contact" name="contact" value="{{ attachee_contact }}" readonly>
+                </div>
+
+                <div class="form-field">
+                    <label for="interests">Interests:</label>
+                    <input type="text" id="interests" name="interests" value="{{ attachee_interests }}" readonly>
+                </div>
+            
+                <div class="form-field">
+                    <label for="start-date">Start Date:</label>
+                    <input type="date" id="start-date" name="start-date" value="{{ attachee_start_date }}" readonly>
+                </div>
+            
+                <div class="form-field">
+                    <label for="end-date">End Date:</label>
+                    <input type="date" id="end-date" name="end-date" value="{{ attachee_end_date }}" readonly>
+                </div>
+            </div> 
+        </form>
+    </div>
+</body>
+</html>

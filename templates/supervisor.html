@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Select Supervisor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #F7F9FB;
+        }
+
+        header {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            width: 400px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px #ccc;
+        }
+
+        form {
+            margin-bottom: 10px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        /* Optional styling for the table */
+        table {
+            border: 1px solid #ccc;
+        }
+
+        th {
+            font-weight: bold;
+        }
+
+        td {
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <header>Select Supervisor</header>
+    <div class="container">
+        <form>
+            <table id="supervisor-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Field of Interest</th>
+                        <th>Contact</th>
+                        <th>Professional</th>
+                        <th>Select</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Supervisor data will be inserted here dynamically -->
+                </tbody>
+            </table>
+            <button type="button" id="assign_supervisor">Assign Supervisor</button>
+        </form>
+    </div>
+
+    <script>
+        // JavaScript code here
+        window.addEventListener('DOMContentLoaded', () => {
+            // Fetch supervisors data from the server
+            fetchSupervisorsData();
+        });
+
+        function fetchSupervisorsData() {
+            // Make an API request to retrieve supervisors data
+            fetch('/api/supervisors')
+                .then(response => response.json())
+                .then(data => {
+                    // Process the received data and populate the table
+                    populateSupervisorTable(data);
+                })
+                .catch(error => {
+                    console.log('Error fetching supervisors data:', error);
+                });
+        }
+
+        function populateSupervisorTable(supervisors) {
+            const tableBody = document.querySelector('#supervisor-table tbody');
+
+            // Clear any existing table rows
+            tableBody.innerHTML = '';
+
+            // Iterate over the supervisors array and create table rows
+            supervisors.forEach(supervisor => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${supervisor.name}</td>
+                    <td>${supervisor.email}</td>
+                    <td>${supervisor.field}</td>
+                    <td>${supervisor.contact}</td>
+                    <td>${supervisor.professional}</td>
+                    <td><input type="checkbox" name="selected_supervisors[]" value="${supervisor.id}"></td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        const assignSupervisorButton = document.getElementById('assign_supervisor');
+        assignSupervisorButton.addEventListener('click', () => {
+            const selectedSupervisors = document.querySelectorAll('input[name="selected_supervisors[]"]:checked');
+            const supervisorIds = Array.from(selectedSupervisors).map(supervisor => supervisor.value);
+
+            // Do something with the selected supervisor IDs
+            console.log(supervisorIds);
+        });
+    </script>
+</body>
+</html>
